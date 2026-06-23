@@ -1,0 +1,5 @@
+Versi,Waktu(detik),Speedup,Ukuran Gambar
+Serial,0.1910,1.0,728x410
+OpenMP,0.0520,3.67,728x410
+CUDA,0.1141,1.67,728x410
+Distributed,0.0513,3.73,728x410
