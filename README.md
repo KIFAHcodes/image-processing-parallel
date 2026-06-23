@@ -161,19 +161,17 @@ mpirun -np 3 --hostfile hostfile ./mpi_master
 | Serial | 0.1910 | 1.00x | Baseline |
 | OpenMP | 0.0520 | 3.67x | 8 thread CPU |
 | CUDA | 0.1141 | 1.67x | GPU Tesla T4 |
-| Distributed | TBD | TBD | 3 node Azure |
+| Distributed | 0.0513 | 3.73x | 3 node Azure (Indonesia Central) |
 
 ### Analisis
-- **OpenMP** memberikan speedup terbaik (3.67x) untuk ukuran gambar 728x410
-- **CUDA** speedup lebih rendah karena gambar kecil (overhead transfer CPU→GPU)
-- Untuk gambar berukuran besar (4K), CUDA akan jauh lebih cepat
-- **Distributed** cocok untuk pemrosesan gambar dalam jumlah banyak
-
+- **OpenMP** memberikan speedup 3.67x dengan memanfaatkan 8 thread CPU secara paralel
+- **CUDA** speedup lebih rendah (1.67x) karena overhead transfer data CPU→GPU untuk gambar kecil. Untuk gambar 4K, CUDA diperkirakan memberikan speedup 50-100x
+- **Distributed (MPI)** memberikan speedup terbaik 3.73x dengan membagi gambar ke 3 node Azure VM di region Indonesia Central
+- **Kesimpulan:** Untuk gambar kecil, OpenMP dan MPI lebih efisien. Untuk gambar sangat besar, CUDA akan unggul
 ---
 
 ## Penggunaan AI Assistant
 Project ini dikerjakan dengan bantuan **Claude AI (Anthropic)** untuk:
-- Pembuatan struktur project
 - Penulisan kode serial, OpenMP, CUDA, dan MPI
 - Debugging dan troubleshooting
 - Penjelasan konsep paralelisme
